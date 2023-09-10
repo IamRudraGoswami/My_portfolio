@@ -22,8 +22,8 @@ const Computers = ({ isMobile }) => {
       <pointLight intensity={20} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
+        scale={isMobile ? [0.5, 0.5, 0.5] : [0.75, 0.75, 0.75]} // Adjust the scale
+        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]} // Adjust the position
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -34,8 +34,6 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // ... Media query setup remains the same
-    
     // Add a listener for changes to the screen size
     const mediaQuery = window.matchMedia("(max-width: 500px)");
 
@@ -67,11 +65,10 @@ const ComputersCanvas = () => {
     >
       <Suspense fallback={<CanvasLoader />}>
         {/* Use both mouse and touch-enabled controls */}
-
         <OrbitControls
           enableZoom={!isMobile} // Enable zoom only on non-mobile
           enablePan={!isMobile}
-          enableRotate={!isMobile}
+          enableRotate={true} // Enable rotation on both mobile and desktop
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
